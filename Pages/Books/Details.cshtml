@@ -35,6 +35,19 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Book.PublishingDate)
         </dd>
+
+        <dt class="col-sm-2">
+            Categories
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var category in Model.Book.BookCategories)
+            {
+                <div>
+                    @category.Category.CategoryName
+                </div>
+            }
+        </dd>
+
     </dl>
 </div>
 <div>

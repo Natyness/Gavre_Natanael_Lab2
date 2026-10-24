@@ -1,4 +1,4 @@
-@page
+@page "/"
 @model Gavre_Natnael_Lab2.Pages.Books.IndexModel
 
 @{
@@ -28,11 +28,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Publisher.PublisherName)
             </th>
+            <th>Categories</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Book) {
+@foreach (var item in Model.BookD.Books) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -49,6 +50,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Publisher.PublisherName)
             </td>
+
+            <td>
+                @foreach (var category in item.BookCategories)
+                {
+                    <div>
+                        @category.Category.ID
+                        @category.Category.CategoryName
+                    </div>
+                }
+            </td>
+
             <td>
 
             <td>

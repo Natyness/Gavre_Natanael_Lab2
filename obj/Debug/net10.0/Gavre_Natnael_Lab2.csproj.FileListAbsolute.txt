@@ -656,3 +656,4 @@
 /Users/Nati/FSEGA/MediiDeProgramare/Gavre_Natanael_Lab2/obj/Debug/net10.0/Gavre_Natnael_Lab2.pdb
 /Users/Nati/FSEGA/MediiDeProgramare/Gavre_Natanael_Lab2/obj/Debug/net10.0/Gavre_Natnael_Lab2.genruntimeconfig.cache
 /Users/Nati/FSEGA/MediiDeProgramare/Gavre_Natanael_Lab2/obj/Debug/net10.0/ref/Gavre_Natnael_Lab2.dll
+/Users/Nati/FSEGA/MediiDeProgramare/Gavre_Natanael_Lab2/obj/Debug/net10.0/Gavre_Natnael_Lab2.sourcelink.json

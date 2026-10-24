@@ -10,7 +10,7 @@ using Gavre_Natanael_Lab2.Models;
 
 namespace Gavre_Natnael_Lab2.Pages.Books
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BookCategoriesPageModel
     {
         private readonly Gavre_Natanael_Lab2.Data.Gavre_Natanael_Lab2Context _context;
 
@@ -19,25 +19,74 @@ namespace Gavre_Natnael_Lab2.Pages.Books
             _context = context;
         }
 
+        
         public IActionResult OnGet()
         {
-            ViewData["PublisherID"] =
-                new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
+            var authorList = _context.Author.Select(a => new
+            {
+                a.ID,
+                FullName = a.LastName + " " + a.FirstName
+            });
 
-            ViewData["AuthorID"] =
-                new SelectList(_context.Set<Author>(), "ID", "LastName");    
+            ViewData["AuthorID"] = new SelectList(
+                authorList, "ID", "FullName");
+
+            ViewData["PublisherID"] = new SelectList(
+                _context.Publisher, "ID", "PublisherName");
+
+            var book = new Book();
+            book.BookCategories = new List<BookCategory>();
+
+            PopulateAssignedCategoryData(_context, book);
 
             return Page();
         }
+
 
         [BindProperty]
         public Book Book { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        
+        public async Task<IActionResult> OnPostAsync(
+            string[]? selectedCategories)
         {
+            // Construim lista categoriilor selectate
+            Book.BookCategories = new List<BookCategory>();
+
+            if (selectedCategories != null)
+            {
+                foreach (var cat in selectedCategories)
+                {
+                    Book.BookCategories.Add(new BookCategory
+                    {
+                        CategoryID = int.Parse(cat)
+                    });
+                }
+            }
+
+            // Categoriile sunt gestionate separat
+            ModelState.Remove("Book.BookCategories");
+
             if (!ModelState.IsValid)
             {
+                var authorList = _context.Author.Select(a => new
+                {
+                    a.ID,
+                    FullName = a.LastName + " " + a.FirstName
+                });
+
+                ViewData["AuthorID"] = new SelectList(
+                    authorList, "ID", "FullName", Book.AuthorID);
+
+                ViewData["PublisherID"] = new SelectList(
+                    _context.Publisher,
+                    "ID",
+                    "PublisherName",
+                    Book.PublisherID);
+
+                PopulateAssignedCategoryData(_context, Book);
+
                 return Page();
             }
 
@@ -46,5 +95,6 @@ namespace Gavre_Natnael_Lab2.Pages.Books
 
             return RedirectToPage("./Index");
         }
+
     }
 }

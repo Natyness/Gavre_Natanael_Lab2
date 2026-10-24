@@ -1,5 +1,5 @@
 @page
-@model Gavre_Natnael_Lab2.Pages.Books.EditModel
+@model Gavre_Natanael_Lab2.Pages.Books.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="Book.ID" />
             <div class="form-group">
                 <label asp-for="Book.Title" class="control-label"></label>
@@ -45,6 +45,24 @@
                 </select>
                 <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label>Categories</label>
+                <div class="row">
+                    @foreach (var cat in Model.AssignedCategoryDataList)
+                    {
+                        <div class="col-md-4">
+                            <input type="checkbox"
+                                name="selectedCategories"
+                                value="@cat.CategoryID"
+                                checked="@cat.Assigned" />
+
+                            @cat.CategoryID @cat.Name
+                        </div>
+                    }
+                </div>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
