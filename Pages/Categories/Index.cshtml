@@ -1,4 +1,4 @@
-@page
+@page "{id:int?}"
 @model Gavre_Natnael_Lab2.Pages.Categories.IndexModel
 
 @{
@@ -19,18 +19,68 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model.Category) {
-        <tr>
+
+<tbody>
+    @foreach (var item in Model.CategoryData.Categories)
+    {
+        string selectedRow = "";
+
+        if (item.ID == Model.CategoryID)
+        {
+            selectedRow = "table-success";
+        }
+
+        <tr class="@selectedRow">
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
+                @item.CategoryName
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="./Index"
+                   asp-route-id="@item.ID">Select</a> |
+
+                <a asp-page="./Edit"
+                   asp-route-id="@item.ID">Edit</a> |
+
+                <a asp-page="./Details"
+                   asp-route-id="@item.ID">Details</a> |
+
+                <a asp-page="./Delete"
+                   asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
-}
-    </tbody>
+    }
+</tbody>
+
 </table>
+
+
+@if (Model.CategoryID != 0)
+{
+    <h3>Books in Selected Category</h3>
+
+    @if (Model.CategoryData.Books.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.CategoryData.Books)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@(book.Author?.FullName)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Aceasta categorie nu are carti asociate.</p>
+    }
+}
+

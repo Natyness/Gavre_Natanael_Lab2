@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gavre_Natnael_Lab2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39699d174219cb38fc6c5dacade1bbd904daecdf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e4ba9d4f79c8326e443eeeace291ee0954f649a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gavre_Natnael_Lab2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gavre_Natnael_Lab2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
