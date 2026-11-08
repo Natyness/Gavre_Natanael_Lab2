@@ -19,5 +19,9 @@ namespace Gavre_Natanael_Lab2.Data
         public DbSet<Gavre_Natanael_Lab2.Models.Author> Author { get; set; } = default!;
         public DbSet<Category> Category { get; set; }
         public DbSet<BookCategory> BookCategory { get; set; }
+
+        public DbSet<Member> Member { get; set; } = default!;
+
+        public DbSet<Borrowing> Borrowing { get; set; } = default!;
     }
 }
